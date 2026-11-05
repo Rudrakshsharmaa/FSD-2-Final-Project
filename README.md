@@ -20,6 +20,29 @@ You can start editing the page by modifying `app/page.tsx`. The page auto-update
 
 This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
+## Portal pages and APIs
+
+The portal navigation opens role-specific pages under `/student/*`, `/admin/*`,
+`/recruiter/*`, and `/super-admin/*`. These pages use the authenticated
+`/api/portal/[section]` API for listing, searching, and supported create/update/
+delete actions. API access is checked against the signed session cookie and the
+role allowed for each section. Recruiter records are scoped to the demo
+recruiter's authorized company.
+
+The portal includes a theme toggle on public and authenticated pages. The
+selection is saved in browser local storage.
+
+### Demo data and production setup
+
+The API currently operates on seeded in-memory demo records. Changes are
+available to the running server process, but are not durable across a server
+restart and are not a substitute for a production database. No Supabase
+credentials or persistent database schema are configured in this workspace.
+Before production use, connect the API data layer to a configured database,
+enable database-level row policies, and configure an email provider for account
+recovery. The forgot-password page clearly reports that email delivery is not
+configured rather than claiming that a reset email was sent.
+
 ## Learn More
 
 To learn more about Next.js, take a look at the following resources:
